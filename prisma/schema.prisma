@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model clasesbasic {
+  id             Int             @id @default(autoincrement())
+  nombre         String          @db.VarChar(45)
+  costo          Decimal         @default(0.00) @db.Decimal(10, 2)
+  sucursal       String          @db.VarChar(45)
+  clasesdetalles clasesdetalles?
+}
+
+model clasesdetalles {
+  detalleId   Int         @id @default(autoincrement())
+  claseId     Int         @unique(map: "claseId")
+  cupoMax     Int         @default(5)
+  lunes       Boolean     @default(false)
+  martes      Boolean     @default(false)
+  miercoles   Boolean     @default(false)
+  jueves      Boolean     @default(false)
+  viernes     Boolean     @default(false)
+  clasesbasic clasesbasic @relation(fields: [claseId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "clasesdetalles_ibfk_1")
+}
