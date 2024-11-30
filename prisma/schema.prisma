@@ -9,20 +9,20 @@ datasource db {
 
 model clasesbasic {
   id             Int             @id @default(autoincrement())
-  nombre         String          @db.VarChar(45)
-  costo          Decimal         @default(0.00) @db.Decimal(10, 2)
-  sucursal       String          @db.VarChar(45)
+  nombre         String          @db.VarChar(50)
+  costo          Decimal         @db.Decimal(10, 2)
+  sucursal       String          @db.VarChar(50)
   clasesdetalles clasesdetalles?
 }
 
 model clasesdetalles {
-  detalleId   Int         @id @default(autoincrement())
-  claseId     Int         @unique(map: "claseId")
-  cupoMax     Int         @default(5)
+  id          Int         @id
+  cupoMax     Int
   lunes       Boolean     @default(false)
   martes      Boolean     @default(false)
   miercoles   Boolean     @default(false)
   jueves      Boolean     @default(false)
   viernes     Boolean     @default(false)
-  clasesbasic clasesbasic @relation(fields: [claseId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "clasesdetalles_ibfk_1")
+  sabado      Boolean     @default(false)
+  clasesbasic clasesbasic @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "clasesdetalles_fk_1")
 }

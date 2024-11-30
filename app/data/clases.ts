@@ -54,7 +54,7 @@ export async function crearClase(data: Clase) {
 
       const clasesDetalles = await prisma.clasesdetalles.create({
         data: {
-          claseId: clasesBasic.id,
+          id: clasesBasic.id,
           cupoMax: parsedData.cupoMax,
           lunes: parsedData.lunes,
           martes: parsedData.martes,
@@ -80,7 +80,7 @@ export async function obtenerClases() {
 export async function obtenerDetallesClase(id: number) {
   return await prisma.clasesdetalles.findMany({
     where: {
-      claseId: id,
+      id: id,
     },
   });
 }
@@ -163,7 +163,7 @@ export async function deleteClase(id: number) {
     const result = await prisma.$transaction(async (prisma) => {
       await prisma.clasesdetalles.deleteMany({
         where: {
-          claseId: id,
+          id: id,
         },
       });
 

@@ -153,7 +153,7 @@ const Resultados = () => {
             <Collapse in={open} timeout="auto" unmountOnExit>
               <Box sx={{ margin: 1, color: "#EBF4FF" }}>
                 {loading[row.id] ? (
-                  <div>Loading...</div>
+                  <div>Cargando...</div>
                 ) : error[row.id] ? (
                   <div>{error[row.id]}</div>
                 ) : (
